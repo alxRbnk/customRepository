@@ -3,14 +3,16 @@ package com.rubnikovich.task1.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class AverageTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class SumTest {
 
     @Test
     void methodPositive() {
-        Average average = new Average();
-        int[] array = {1, 2, 3, 4, 5};
-        int actual = average.averageNumber(array);
-        int expected = 3;
+        Sum sum = new Sum();
+        int[] array = {1, 2, 3, -4};
+        int actual = sum.sumValuesArray(array);
+        int expected = 2;
         Assertions.assertEquals(expected, actual);
     }
 }
