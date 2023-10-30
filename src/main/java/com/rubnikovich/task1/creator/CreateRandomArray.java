@@ -2,11 +2,11 @@ package com.rubnikovich.task1.creator;
 
 import java.util.Random;
 
-public class CreatorArray {
+public class CreateRandomArray {
     private static final int MIN_VALUE = -100;
     private static final int MAX_VALUE = 100;
 
-    private CreatorArray(){
+    private CreateRandomArray(){
     }
 
     public static int[] create(int length){
