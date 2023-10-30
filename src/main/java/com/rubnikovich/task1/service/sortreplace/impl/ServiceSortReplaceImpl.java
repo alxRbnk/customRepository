@@ -1,20 +1,51 @@
 package com.rubnikovich.task1.service.sortreplace.impl;
 
+import com.rubnikovich.task1.exception.CustomException;
 import com.rubnikovich.task1.service.sortreplace.ServiceSortReplace;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ServiceSortReplaceImpl implements ServiceSortReplace {
 
-    public int[] replaceValueArray(int[] arr, int value, int index) {
-        int[] temp = arr.clone();
-        if (index > arr.length) {
-            System.out.println("----------"); //fixme
-        }
-        int[] array = temp;
-        array[index] = value;
-        return array;
+    static Logger logger = LogManager.getLogger();
+    private static ServiceSortReplaceImpl INSTANCE;
+
+    private ServiceSortReplaceImpl() {
     }
 
-    public int[] firstSortArray(int[] array) {
+    public static ServiceSortReplaceImpl getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ServiceSortReplaceImpl();
+        }
+        return INSTANCE;
+    }
+
+    private void logService(int[] arr) throws CustomException {
+        if (arr == null) {
+            logger.error("Array is null");
+            throw new CustomException("Array is null");
+        }
+    }
+
+    public int[] replaceValueArray(int[] arr, int value, int index) throws CustomException {
+        if (arr == null) {
+            logger.error("Array is null");
+            throw new CustomException("Array is null");
+        } else if (index >= arr.length) {
+            logger.error("index bigger than array length");
+            throw new CustomException("index bigger than array length");
+        } else {
+            int[] temp = arr.clone();
+            if (index > arr.length) {
+            }
+            int[] array = temp;
+            array[index] = value;
+            return array;
+        }
+    }
+
+    public int[] firstSortArray(int[] array) throws CustomException {
+        logService(array);
         int[] sortArr = array.clone();
         for (int i = 0; i < sortArr.length; i++) {
             for (int j = 0; j < sortArr.length; j++) {
@@ -28,7 +59,8 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         return sortArr;
     }
 
-    public int[] wildSortArray(int[] array) {
+    public int[] wildSortArray(int[] array) throws CustomException {
+        logService(array);
         int[] cloneArray = array.clone();
         int[] temp = new int[cloneArray.length];
         int index = 0;
@@ -46,7 +78,8 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         return temp;
     }
 
-    public int[] anotherSortArray(int[] array) {
+    public int[] anotherSortArray(int[] array) throws CustomException {
+        logService(array);
         int[] cloneArray = array.clone();
         for (int i = 0; i < cloneArray.length; i++) {
             int temp = i;
