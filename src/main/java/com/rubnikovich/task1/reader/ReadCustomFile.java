@@ -14,7 +14,7 @@ public class ReadCustomFile {
         try {
             list = Files.readAllLines(Paths.get(pathToFile));
         } catch (IOException e) {
-            throw new CustomException("path to file is invalid");
+            throw new CustomException("path to file is invalid", e);
         }
         return list;
     }

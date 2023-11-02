@@ -1,48 +1,46 @@
 package com.rubnikovich.task1.service.sortreplace;
 
+import com.rubnikovich.task1.entity.CustomArray;
 import com.rubnikovich.task1.exception.CustomException;
 import com.rubnikovich.task1.service.sortreplace.impl.ServiceSortReplaceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class ServiceSortReplaceTest {
 
-    private static final int[] ARRAY = {1, -2, -3, 4, 5, 4, 0};
-    private static final int[] SORT_ARRAY = {-3, -2, 0, 1, 4, 4, 5};
-    private ServiceSortReplace array;
-
-    @BeforeEach
-    public void createServiceSortReplace() {
-        array = ServiceSortReplaceImpl.getInstance();
-    }
+    private ServiceSortReplace service = ServiceSortReplaceImpl.getInstance();
 
     @Test
     void replaceValueArray() throws CustomException {
-        int[] actual = array.replaceValueArray(ARRAY, 99, 2);
+        CustomArray customArray = new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}, 111111);
+        CustomArray actual = service.replaceValueArray(customArray, 99, 2);
         int[] expected = {1, -2, 99, 4, 5, 4, 0};
-        assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual.getArr());
     }
 
     @Test
     void firstSortArray() throws CustomException {
-        int[] actual = array.firstSortArray(ARRAY);
-        int[] expected = SORT_ARRAY;
-        assertArrayEquals(expected, actual);
+        CustomArray customArray = new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 1}, 111111);
+        CustomArray actual = service.firstSortArray(customArray);
+        int[] expected = {-3, -2, 1, 1, 4, 4, 5};
+        assertArrayEquals(expected, actual.getArr());
     }
 
     @Test
     void wildSortArray() throws CustomException {
-        int[] actual = array.wildSortArray(ARRAY);
-        int[] expected = SORT_ARRAY;
-        assertArrayEquals(expected, actual);
+        CustomArray customArray = new CustomArray(new int[]{1, -2, -3, 4, 6, 4, -1}, 111111);
+        CustomArray actual = service.wildSortArray(customArray);
+        int[] expected = {-3, -2, -1, 1, 4, 4, 6};
+        assertArrayEquals(expected, actual.getArr());
     }
 
     @Test
     void anotherSortArray() throws CustomException {
-        int[] actual = array.wildSortArray(ARRAY);
-        int[] expected = SORT_ARRAY;
-        assertArrayEquals(expected, actual);
+        CustomArray customArray = new CustomArray(new int[]{1, -2, -3, 4, 7, 4, 0}, 111111);
+        CustomArray actual = service.wildSortArray(customArray);
+        int[] expected = {-3, -2, 0, 1, 4, 4, 7};
+        assertArrayEquals(expected, actual.getArr());
     }
+
 }

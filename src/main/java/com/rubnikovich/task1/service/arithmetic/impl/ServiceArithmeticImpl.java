@@ -1,5 +1,6 @@
 package com.rubnikovich.task1.service.arithmetic.impl;
 
+import com.rubnikovich.task1.entity.CustomArray;
 import com.rubnikovich.task1.exception.CustomException;
 import com.rubnikovich.task1.service.arithmetic.ServiceArithmetic;
 import org.apache.logging.log4j.LogManager;
@@ -21,35 +22,35 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
         return INSTANCE;
     }
 
-    private void logService(int[] arr) throws CustomException {
-        if (arr == null) {
+    private void logService(CustomArray customArray) throws CustomException {
+        if (customArray == null) {
             logger.error("Array is null");
             throw new CustomException("Array is null");
         }
     }
 
-    public int sumValuesArray(int[] arr) throws CustomException {
-        logService(arr);
+    public int sumValuesArray(CustomArray customArray) throws CustomException {
+        logService(customArray);
         int sum = 0;
-        for (int s : arr) {
+        for (int s : customArray.getArr()) {
             sum += s;
         }
         return sum;
     }
 
-    public int averageValuesArray(int[] arr) throws CustomException {
-        logService(arr);
+    public int averageValuesArray(CustomArray customArray) throws CustomException {
+        logService(customArray);
         double number = 0;
-        for (int s : arr) {
+        for (int s : customArray.getArr()) {
             number += s;
         }
-        return (int) Math.round(number / arr.length);
+        return (int) Math.round(number / customArray.getArr().length);
     }
 
-    public int countPositiveNumber(int[] arr) throws CustomException {
-        logService(arr);
+    public int countPositiveNumber(CustomArray customArray) throws CustomException {
+        logService(customArray);
         int positive = 0;
-        for (int s : arr) {
+        for (int s : customArray.getArr()) {
             if (s > 0) {
                 positive++;
             }
@@ -57,10 +58,10 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
         return positive;
     }
 
-    public int countNegativeNumber(int[] arr) throws CustomException {
-        logService(arr);
+    public int countNegativeNumber(CustomArray customArray) throws CustomException {
+        logService(customArray);
         int negative = 0;
-        for (int s : arr) {
+        for (int s : customArray.getArr()) {
             if (s < 0) {
                 negative++;
             }
@@ -68,10 +69,10 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
         return negative;
     }
 
-    public int maxValueArray(int[] arr) throws CustomException {
-        logService(arr);
+    public int maxValueArray(CustomArray customArray) throws CustomException {
+        logService(customArray);
         int max = Integer.MIN_VALUE;
-        for (int s : arr) {
+        for (int s : customArray.getArr()) {
             if (s > max) {
                 max = s;
             }
@@ -79,10 +80,10 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
         return max;
     }
 
-    public int minValueArray(int[] arr) throws CustomException {
-        logService(arr);
+    public int minValueArray(CustomArray customArray) throws CustomException {
+        logService(customArray);
         int min = Integer.MAX_VALUE;
-        for (int s : arr) {
+        for (int s : customArray.getArr()) {
             if (s < min) {
                 min = s;
             }
