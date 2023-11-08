@@ -1,32 +1,34 @@
 package com.rubnikovich.task1.entity;
 
+import com.rubnikovich.task1.util.IdGenerator;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 public class CustomArray {
 
-    private int[] arr;
-    private int Id;
+    private int arrayId;
+    private int[] array;
 
-    public CustomArray(int[] arr, int index) {
-        this.arr = arr;
-        this.Id = index;
+    public CustomArray(int[] arr) {
+        this.array = arr;
+        this.arrayId = IdGenerator.generate();
     }
 
-    public int[] getArr() {
-        return arr;
+    public int[] getArray() {
+        return array;
     }
 
-    public void setArr(int[] arr) {
-        this.arr = arr;
+    public void setArray(int[] array) {
+        this.array = array;
     }
 
-    public int getId() {
-        return Id;
+    public int getArrayId() {
+        return arrayId;
     }
 
-    public void setId(int id) {
-        this.Id = id;
+    public void setArrayId(int arrayId) {
+        this.arrayId = arrayId;
     }
 
     @Override
@@ -34,22 +36,21 @@ public class CustomArray {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomArray that = (CustomArray) o;
-        return Id == that.Id && Arrays.equals(arr, that.arr);
+        return arrayId == that.arrayId && Arrays.equals(array, that.array);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(Id);
-        result = 31 * result + Arrays.hashCode(arr);
+        int result = Objects.hash(arrayId);
+        result = 31 * result + Arrays.hashCode(array);
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("");
-        sb.append("").append(Arrays.toString(arr));
-        sb.append(" Id - ").append(Id);
-
+        sb.append("").append(Arrays.toString(array));
+        sb.append(" Id - ").append(arrayId);
         return sb.toString();
     }
 }

@@ -32,11 +32,11 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         if (customArray == null) {
             logger.error("Array is null");
             throw new CustomException("Array is null");
-        } else if (index >= customArray.getArr().length) {
+        } else if (index >= customArray.getArray().length) {
             logger.error("index bigger than array length");
             throw new CustomException("index bigger than array length");
         } else {
-            customArray.getArr()[index] = value;
+            customArray.getArray()[index] = value;
             return customArray;
         }
     }
@@ -44,12 +44,12 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
     public CustomArray firstSortArray(CustomArray customArray) throws CustomException {
         logService(customArray);
 
-        for (int i = 0; i < customArray.getArr().length; i++) {
-            for (int j = 0; j < customArray.getArr().length; j++) {
-                if (customArray.getArr()[i] < customArray.getArr()[j]) {
-                    int temp = customArray.getArr()[i];
-                    customArray.getArr()[i] = customArray.getArr()[j];
-                    customArray.getArr()[j] = temp;
+        for (int i = 0; i < customArray.getArray().length; i++) {
+            for (int j = 0; j < customArray.getArray().length; j++) {
+                if (customArray.getArray()[i] < customArray.getArray()[j]) {
+                    int temp = customArray.getArray()[i];
+                    customArray.getArray()[i] = customArray.getArray()[j];
+                    customArray.getArray()[j] = temp;
                 }
             }
         }
@@ -58,7 +58,7 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
 
     public CustomArray wildSortArray(CustomArray customArray) throws CustomException {
         logService(customArray);
-        int[] cloneArray = customArray.getArr().clone();
+        int[] cloneArray = customArray.getArray().clone();
         int index = 0;
         for (int i = 0; i < cloneArray.length; i++) {
             int min = Integer.MAX_VALUE;
@@ -68,7 +68,7 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
                     index = j;
                 }
             }
-            customArray.getArr()[i] = min;
+            customArray.getArray()[i] = min;
             cloneArray[index] = Integer.MAX_VALUE;
         }
         return customArray;
@@ -76,16 +76,16 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
 
     public CustomArray anotherSortArray(CustomArray customArray) throws CustomException {
         logService(customArray);
-        for (int i = 0; i < customArray.getArr().length; i++) {
+        for (int i = 0; i < customArray.getArray().length; i++) {
             int temp = i;
-            for (int j = i; j < customArray.getArr().length; j++) {
-                if (customArray.getArr()[j] < customArray.getArr()[temp]) {
+            for (int j = i; j < customArray.getArray().length; j++) {
+                if (customArray.getArray()[j] < customArray.getArray()[temp]) {
                     temp = j;
                 }
             }
-            int tmp = customArray.getArr()[i];
-            customArray.getArr()[i] = customArray.getArr()[temp];
-            customArray.getArr()[temp] = tmp;
+            int tmp = customArray.getArray()[i];
+            customArray.getArray()[i] = customArray.getArray()[temp];
+            customArray.getArray()[temp] = tmp;
         }
         return customArray;
     }

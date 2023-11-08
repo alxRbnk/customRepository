@@ -32,7 +32,7 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
     public int sumValuesArray(CustomArray customArray) throws CustomException {
         logService(customArray);
         int sum = 0;
-        for (int s : customArray.getArr()) {
+        for (int s : customArray.getArray()) {
             sum += s;
         }
         return sum;
@@ -41,16 +41,16 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
     public int averageValuesArray(CustomArray customArray) throws CustomException {
         logService(customArray);
         double number = 0;
-        for (int s : customArray.getArr()) {
+        for (int s : customArray.getArray()) {
             number += s;
         }
-        return (int) Math.round(number / customArray.getArr().length);
+        return (int) Math.round(number / customArray.getArray().length);
     }
 
     public int countPositiveNumber(CustomArray customArray) throws CustomException {
         logService(customArray);
         int positive = 0;
-        for (int s : customArray.getArr()) {
+        for (int s : customArray.getArray()) {
             if (s > 0) {
                 positive++;
             }
@@ -61,7 +61,7 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
     public int countNegativeNumber(CustomArray customArray) throws CustomException {
         logService(customArray);
         int negative = 0;
-        for (int s : customArray.getArr()) {
+        for (int s : customArray.getArray()) {
             if (s < 0) {
                 negative++;
             }
@@ -72,7 +72,7 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
     public int maxValueArray(CustomArray customArray) throws CustomException {
         logService(customArray);
         int max = Integer.MIN_VALUE;
-        for (int s : customArray.getArr()) {
+        for (int s : customArray.getArray()) {
             if (s > max) {
                 max = s;
             }
@@ -83,7 +83,7 @@ public class ServiceArithmeticImpl implements ServiceArithmetic {
     public int minValueArray(CustomArray customArray) throws CustomException {
         logService(customArray);
         int min = Integer.MAX_VALUE;
-        for (int s : customArray.getArr()) {
+        for (int s : customArray.getArray()) {
             if (s < min) {
                 min = s;
             }

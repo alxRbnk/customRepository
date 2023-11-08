@@ -24,44 +24,44 @@ class ServiceArithmeticTest {
 
     private static Stream<Arguments> argsFactory() {
         return Stream.of(
-                Arguments.of(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0},111111), 9),
-                Arguments.of(new CustomArray(new int[]{1, -2, -1, -4, 5, 4, 0}, 111111), 3),
-                Arguments.of(new CustomArray(new int[]{0, -2, -3, 1, 15, 4, 0},111111), 15),
-                Arguments.of(new CustomArray(new int[]{5, -2, -3, 1, 5, 4, 6}, 111111), 16)
+                Arguments.of(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}), 9),
+                Arguments.of(new CustomArray(new int[]{1, -2, -1, -4, 5, 4, 0}), 3),
+                Arguments.of(new CustomArray(new int[]{0, -2, -3, 1, 15, 4, 0}), 15),
+                Arguments.of(new CustomArray(new int[]{5, -2, -3, 1, 5, 4, 6}), 16)
         );
     }
 
     @Test
-    void averageValuesArray() throws CustomException {
-        int actual = service.averageValuesArray(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}, 111111));
+    void averageValuesArrayTest() throws CustomException {
+        int actual = service.averageValuesArray(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}));
         int expected = 1;
         assertEquals(expected, actual);
     }
 
     @Test
-    void countPositiveNumber() throws CustomException {
-        int actual = service.countPositiveNumber(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}, 111111));
+    void countPositiveNumberTest() throws CustomException {
+        int actual = service.countPositiveNumber(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}));
         int expected = 4;
         assertEquals(expected, actual);
     }
 
     @Test
-    void countNegativeNumber() throws CustomException {
-        int actual = service.countNegativeNumber(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}, 111111));
+    void countNegativeNumberTest() throws CustomException {
+        int actual = service.countNegativeNumber(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}));
         int expected = 2;
         assertEquals(expected, actual);
     }
 
     @Test
-    void maxValueArray() throws CustomException {
-        int actual = service.maxValueArray(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}, 111111));
+    void maxValueArrayTest() throws CustomException {
+        int actual = service.maxValueArray(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}));
         int expected = 5;
         assertEquals(expected, actual);
     }
 
     @Test
-    void minValueArray() throws CustomException {
-        int actual = service.minValueArray(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}, 111111));
+    void minValueArrayTest() throws CustomException {
+        int actual = service.minValueArray(new CustomArray(new int[]{1, -2, -3, 4, 5, 4, 0}));
         int expected = -3;
         assertEquals(expected, actual);
     }
