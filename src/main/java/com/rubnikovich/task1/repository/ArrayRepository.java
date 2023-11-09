@@ -9,14 +9,18 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ArrayRepository {
+    private static ArrayRepository INSTANCE;
     private List<CustomArray> customArrays;
 
-    public ArrayRepository(){
-        this.customArrays = new ArrayList<>();
+    private ArrayRepository(List<CustomArray> customArrays){
+        this.customArrays = customArrays;
     }
 
-    public ArrayRepository(List<CustomArray> customArrays){
-        this.customArrays = customArrays;
+    public static ArrayRepository getInstance() {
+        if(INSTANCE == null) {
+            INSTANCE = new ArrayRepository(new ArrayList<>());
+        }
+        return INSTANCE;
     }
 
     public boolean add(CustomArray customArray) {

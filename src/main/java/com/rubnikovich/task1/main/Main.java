@@ -22,26 +22,7 @@ public class Main {
         ReadCustomFile read = new ReadCustomFile();
         List<String> list = read.readFile("arrFile.txt");
         ArrayFromListFactory arrayFromListFactory = new ArrayFromListFactory();
-
-//        CustomArray customArray = arrayFromListFactory.takeArray(list);
-//        CustomArray customArrayFix = arrayFromListFactory.takeFixedArray(list);
-//        ServiceSortReplace sort = ServiceSortReplaceImpl.getInstance();
-//        ServiceArithmetic arithmetic = ServiceArithmeticImpl.getInstance();
-//
-//        logger.info("array: " + customArray);
-//        logger.info("fixed array: " + customArrayFix);
-//
-//        logger.info("average: " + arithmetic.averageValuesArray(customArray));
-//        logger.info("count negative value: " + arithmetic.countNegativeNumber(customArray));
-//        logger.info("count positive value: " + arithmetic.countPositiveNumber(customArray));
-//        logger.info("min value: " + arithmetic.minValueArray(customArray));
-//        logger.info("max value: " + arithmetic.maxValueArray(customArray));
-//        logger.info("sum value: " + arithmetic.sumValuesArray(customArray));
-//        logger.info("sort three: " + sort.anotherSortArray(customArray));
-//        logger.info("replace: " + sort.replaceValueArray(customArray,0,0));
-
         List<CustomArray> customArrays = arrayFromListFactory.takeArrays(list);
-
         ArrayRepository arrayRepository = arrayFromListFactory.takeRepository(customArrays);
 
         logger.info(arrayRepository.getCustomArrays() + " - repository");
@@ -67,9 +48,15 @@ public class Main {
 //        arrayRepository.sort(new CountPositiveComparator());
         arrayRepository.sort(new LenghtArrayComparator());
 
-        logger.info(arrayRepository.getCustomArrays() + " - repository");
+        logger.info("repository - " + arrayRepository.getCustomArrays());
 
+        CustomArray removeCustomArray = arrayRepository.getCustomArrays().get(0);
+        arrayRepository.remove(removeCustomArray);
 
+        CustomArray addCustomArray = new CustomArray(new int[]{5, 6});
+        arrayRepository.add(addCustomArray);
+
+        logger.info("repository - " + arrayRepository.getCustomArrays());
 
     }
 }

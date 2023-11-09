@@ -21,12 +21,20 @@ public class ArrayFromListFactory {
     private static final String EXTRACT_NUMBER_REGEX = "-?[0-9]+";
 
     public ArrayRepository takeRepository(List<CustomArray> list){
-        ArrayRepository arrayRepository = new ArrayRepository();
+        ArrayRepository arrayRepository = ArrayRepository.getInstance();
         for (CustomArray s : list) {
             arrayRepository.add(s);
         }
         return arrayRepository;
     }
+
+//    public ArrayRepository takeRepository(List<CustomArray> list){
+//        ArrayRepository arrayRepository = new ArrayRepository();
+//        for (CustomArray s : list) {
+//            arrayRepository.add(s);
+//        }
+//        return arrayRepository;
+//    }
 
     public List<CustomArray> takeArrays(List<String> list) throws CustomException {
         List<CustomArray> customArrays = new ArrayList<>();
