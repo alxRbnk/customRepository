@@ -1,6 +1,7 @@
-package com.rubnikovich.task1.repository.spec;
+package com.rubnikovich.task1.repository.spec.impl;
 
 import com.rubnikovich.task1.entity.CustomArray;
+import com.rubnikovich.task1.repository.spec.Specification;
 
 public class IdSpecification implements Specification {
     private int arrayId;

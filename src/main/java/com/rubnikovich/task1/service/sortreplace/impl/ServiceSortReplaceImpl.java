@@ -2,6 +2,8 @@ package com.rubnikovich.task1.service.sortreplace.impl;
 
 import com.rubnikovich.task1.entity.CustomArray;
 import com.rubnikovich.task1.exception.CustomException;
+import com.rubnikovich.task1.observer.ArrayStatisticsObserver;
+import com.rubnikovich.task1.observer.impl.ArrayStatisticsObserverImpl;
 import com.rubnikovich.task1.service.sortreplace.ServiceSortReplace;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,27 +23,28 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         return INSTANCE;
     }
 
-    private void logService(CustomArray customArray) throws CustomException {
+    private void logService(CustomArray customArray) {
         if (customArray == null) {
             logger.error("Array is null");
-            throw new CustomException("Array is null");
         }
     }
 
-    public CustomArray replaceValueArray(CustomArray customArray, int value, int index) throws CustomException {
+    public CustomArray replaceValueArray(CustomArray customArray, int value, int index) {
         if (customArray == null) {
             logger.error("Array is null");
-            throw new CustomException("Array is null");
+            return customArray;
         } else if (index >= customArray.getArray().length) {
             logger.error("index bigger than array length");
-            throw new CustomException("index bigger than array length");
+            return customArray;
         } else {
             customArray.getArray()[index] = value;
+            ArrayStatisticsObserver observer = new ArrayStatisticsObserverImpl();
+            observer.changeArrayElement(customArray);
             return customArray;
         }
     }
 
-    public CustomArray firstSortArray(CustomArray customArray) throws CustomException {
+    public CustomArray firstSortArray(CustomArray customArray) {
         logService(customArray);
 
         for (int i = 0; i < customArray.getArray().length; i++) {
@@ -56,7 +59,7 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         return customArray;
     }
 
-    public CustomArray wildSortArray(CustomArray customArray) throws CustomException {
+    public CustomArray wildSortArray(CustomArray customArray) {
         logService(customArray);
         int[] cloneArray = customArray.getArray().clone();
         int index = 0;
@@ -74,7 +77,7 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         return customArray;
     }
 
-    public CustomArray anotherSortArray(CustomArray customArray) throws CustomException {
+    public CustomArray anotherSortArray(CustomArray customArray) {
         logService(customArray);
         for (int i = 0; i < customArray.getArray().length; i++) {
             int temp = i;
@@ -89,5 +92,4 @@ public class ServiceSortReplaceImpl implements ServiceSortReplace {
         }
         return customArray;
     }
-
 }

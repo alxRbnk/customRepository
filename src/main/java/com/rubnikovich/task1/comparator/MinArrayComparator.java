@@ -11,10 +11,6 @@ public class MinArrayComparator implements Comparator<CustomArray> {
     @Override
     public int compare(CustomArray o1, CustomArray o2) {
         ServiceArithmetic serviceArithmetic = ServiceArithmeticImpl.getInstance();
-        try {
             return serviceArithmetic.minValueArray(o1) - serviceArithmetic.minValueArray(o2);
-        } catch (CustomException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

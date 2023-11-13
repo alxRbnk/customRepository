@@ -1,11 +1,11 @@
-package com.rubnikovich.task1.repository.spec;
+package com.rubnikovich.task1.repository.spec.impl;
 
 import com.rubnikovich.task1.entity.CustomArray;
-import com.rubnikovich.task1.exception.CustomException;
+import com.rubnikovich.task1.repository.spec.Specification;
 import com.rubnikovich.task1.service.arithmetic.ServiceArithmetic;
 import com.rubnikovich.task1.service.arithmetic.impl.ServiceArithmeticImpl;
 
-public class AverageRangeSpecification implements Specification{
+public class AverageRangeSpecification implements Specification {
     private int minValue;
     private int maxValue;
 
@@ -15,9 +15,9 @@ public class AverageRangeSpecification implements Specification{
     }
 
     @Override
-    public boolean specify(CustomArray customArray) throws CustomException {
+    public boolean specify(CustomArray customArray) {
         ServiceArithmetic serviceArithmetic = ServiceArithmeticImpl.getInstance();
-        int averange = serviceArithmetic.averageValuesArray(customArray);
-        return (averange <= maxValue && averange >= minValue);
+        int average = serviceArithmetic.averageValuesArray(customArray);
+        return (average <= maxValue && average >= minValue);
     }
 }

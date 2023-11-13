@@ -5,12 +5,12 @@ import com.rubnikovich.task1.exception.CustomException;
 
 public interface ServiceSortReplace {
 
-    CustomArray replaceValueArray(CustomArray customArray, int value, int index) throws CustomException;
+    CustomArray replaceValueArray(CustomArray customArray, int value, int index);
 
-    CustomArray firstSortArray(CustomArray customArray) throws CustomException;
+    CustomArray firstSortArray(CustomArray customArray);
 
-    CustomArray wildSortArray(CustomArray customArray) throws CustomException;
+    CustomArray wildSortArray(CustomArray customArray);
 
-    CustomArray anotherSortArray(CustomArray customArray) throws CustomException;
+    CustomArray anotherSortArray(CustomArray customArray);
 
 }

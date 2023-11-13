@@ -3,24 +3,22 @@ package com.rubnikovich.task1.repository;
 import com.rubnikovich.task1.entity.CustomArray;
 import com.rubnikovich.task1.exception.CustomException;
 import com.rubnikovich.task1.repository.spec.Specification;
+import com.rubnikovich.task1.repository.spec.SpecificationPredicate;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class ArrayRepository {
-    private static ArrayRepository INSTANCE;
-    private List<CustomArray> customArrays;
+    private static final ArrayRepository instance = new ArrayRepository();
+    private static List<CustomArray> customArrays = new ArrayList<>();
 
-    private ArrayRepository(List<CustomArray> customArrays){
-        this.customArrays = customArrays;
+    private ArrayRepository(){
     }
 
     public static ArrayRepository getInstance() {
-        if(INSTANCE == null) {
-            INSTANCE = new ArrayRepository(new ArrayList<>());
-        }
-        return INSTANCE;
+        return instance;
     }
 
     public boolean add(CustomArray customArray) {
@@ -31,11 +29,11 @@ public class ArrayRepository {
         return customArrays.remove(customArr);
     }
 
-    public void sort(Comparator<CustomArray> c) {
-        customArrays.sort(c);
+    public void sort(Comparator<CustomArray> comparator) {
+        customArrays.sort(comparator);
     }
 
-    public List<CustomArray> query(Specification specification) throws CustomException {
+    public List<CustomArray> query(Specification specification) {
         List<CustomArray> resulst = new ArrayList<>();
         for(CustomArray customArr: customArrays){
             if(specification.specify(customArr)){
@@ -45,7 +43,15 @@ public class ArrayRepository {
         return resulst;
     }
 
-    public List<CustomArray> getCustomArrays() {
+    public List<CustomArray> queryStream(Specification specification) {
+        return customArrays.stream().filter(customArray -> specification.specify(customArray)).toList();
+    }
+
+    public List<CustomArray> queryPredicate(Predicate predicate) {
+        return customArrays.stream().filter(predicate).toList();
+    }
+
+    public List<CustomArray> getRepositoryList() {
         return customArrays;
     }
 }

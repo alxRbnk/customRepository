@@ -11,10 +11,6 @@ public class CountPositiveComparator implements Comparator<CustomArray> {
     @Override
     public int compare(CustomArray o1, CustomArray o2) {
         ServiceArithmetic serviceArithmetic = ServiceArithmeticImpl.getInstance();
-        try {
-            return serviceArithmetic.countPositiveNumber(o1) - serviceArithmetic.countPositiveNumber(o2);
-        } catch (CustomException e) {
-            throw new RuntimeException(e);
-        }
+        return serviceArithmetic.countPositiveNumber(o1) - serviceArithmetic.countPositiveNumber(o2);
     }
 }

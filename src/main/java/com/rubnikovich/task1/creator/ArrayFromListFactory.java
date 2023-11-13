@@ -1,9 +1,15 @@
 package com.rubnikovich.task1.creator;
 
 import com.rubnikovich.task1.entity.CustomArray;
+import com.rubnikovich.task1.entity.Warehouse;
 import com.rubnikovich.task1.exception.CustomException;
 import com.rubnikovich.task1.parser.CustomParser;
+import com.rubnikovich.task1.parser.imp.CustomParserImpl;
 import com.rubnikovich.task1.repository.ArrayRepository;
+import com.rubnikovich.task1.service.arithmetic.ServiceArithmetic;
+import com.rubnikovich.task1.service.arithmetic.impl.ServiceArithmeticImpl;
+import com.rubnikovich.task1.validator.CustomValidator;
+import com.rubnikovich.task1.validator.impl.CustomValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,26 +21,28 @@ import java.util.regex.Pattern;
 
 public class ArrayFromListFactory {
     static Logger logger = LogManager.getLogger();
-    private static final String CORRECT_NUMBER_REGEX = "(\\s*-?\\d+\\s*)+";
-    private static final String NUMBER_INTO_STRING_REGEX = ".*\\d+.*";
     private static final String SPACE_DELIMITER_REGEX = "\\s+";
     private static final String EXTRACT_NUMBER_REGEX = "-?[0-9]+";
+    private CustomValidator validator = CustomValidatorImpl.getInstance();
+    private CustomParser customParser = CustomParserImpl.getInstance();
 
-    public ArrayRepository takeRepository(List<CustomArray> list){
+
+    public Warehouse repositoryToWarehouse(ArrayRepository arrayRepository) {
+        Warehouse warehouse = Warehouse.getInstance();
+        ServiceArithmetic serviceArithmetic = ServiceArithmeticImpl.getInstance();
+        for (CustomArray customArray : arrayRepository.getRepositoryList()) {
+            warehouse.put(customArray.getArrayId(), serviceArithmetic.createAllStatistics(customArray));
+        }
+        return warehouse;
+    }
+
+    public ArrayRepository takeRepository(List<CustomArray> list) {
         ArrayRepository arrayRepository = ArrayRepository.getInstance();
-        for (CustomArray s : list) {
-            arrayRepository.add(s);
+        for (CustomArray listCustom : list) {
+            arrayRepository.add(listCustom);
         }
         return arrayRepository;
     }
-
-//    public ArrayRepository takeRepository(List<CustomArray> list){
-//        ArrayRepository arrayRepository = new ArrayRepository();
-//        for (CustomArray s : list) {
-//            arrayRepository.add(s);
-//        }
-//        return arrayRepository;
-//    }
 
     public List<CustomArray> takeArrays(List<String> list) throws CustomException {
         List<CustomArray> customArrays = new ArrayList<>();
@@ -42,11 +50,11 @@ public class ArrayFromListFactory {
             logger.info("invalid list");
         }
         List<String> customList = takeList(list);
-        for(String line: customList){
+        for (String line : customList) {
             String arrayStringFix = fixline(line);
             String arrayWithoutSpace = arrayStringFix.strip();
             String[] arrayTemp = arrayWithoutSpace.split(SPACE_DELIMITER_REGEX);
-            int[] arrayNumbers = CustomParser.parseStringArrayToIntArray(arrayTemp);
+            int[] arrayNumbers = customParser.parseStringArrayToIntArray(arrayTemp);
             customArrays.add(new CustomArray(arrayNumbers));
         }
         return customArrays;
@@ -62,7 +70,7 @@ public class ArrayFromListFactory {
         String arrayString = correctList.get(0);
         String arrayWithoutSpace = arrayString.strip();
         String[] arrayTemp = arrayWithoutSpace.split(SPACE_DELIMITER_REGEX);
-        int[] arrayNumbers = CustomParser.parseStringArrayToIntArray(arrayTemp);
+        int[] arrayNumbers = customParser.parseStringArrayToIntArray(arrayTemp);
         return new CustomArray(arrayNumbers);
     }
 
@@ -77,14 +85,14 @@ public class ArrayFromListFactory {
         String arrayStringFix = fixline(arrayString);
         String arrayWithoutSpace = arrayStringFix.strip();
         String[] arrayTemp = arrayWithoutSpace.split(SPACE_DELIMITER_REGEX);
-        int[] arrayNumbers = CustomParser.parseStringArrayToIntArray(arrayTemp);
+        int[] arrayNumbers = customParser.parseStringArrayToIntArray(arrayTemp);
         return new CustomArray(arrayNumbers);
     }
 
     private List<String> takeCorrectList(List<String> list) {
         List<String> correctList = new ArrayList<>();
         for (String line : list) {
-            if (line.matches(CORRECT_NUMBER_REGEX)) {
+            if (validator.numberIntoStringValidate(line)) {
                 correctList.add(line);
             }
         }
@@ -94,7 +102,7 @@ public class ArrayFromListFactory {
     private List<String> takeUncorrectList(List<String> list) {
         List<String> uncorrectList = new ArrayList<>();
         for (String line : list) {
-            if (!line.matches(CORRECT_NUMBER_REGEX) && line.matches(NUMBER_INTO_STRING_REGEX)) {
+            if (!validator.correctNumberValidate(line) && validator.numberIntoStringValidate(line)) {
                 uncorrectList.add(line);
             }
         }
@@ -119,7 +127,7 @@ public class ArrayFromListFactory {
     private List<String> takeList(List<String> list) {
         List<String> customList = new ArrayList<>();
         for (String line : list) {
-            if (line.matches(NUMBER_INTO_STRING_REGEX)) {
+            if (validator.numberIntoStringValidate(line)) {
                 customList.add(line);
             }
         }

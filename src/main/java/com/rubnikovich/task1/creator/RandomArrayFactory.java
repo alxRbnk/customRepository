@@ -1,5 +1,8 @@
 package com.rubnikovich.task1.creator;
 
+import com.rubnikovich.task1.entity.CustomArray;
+import com.rubnikovich.task1.util.IdGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,14 +16,18 @@ public class RandomArrayFactory {
     private RandomArrayFactory() {
     }
 
-    public static List<String> create() {
+    public static CustomArray create() {
         Random random = new Random();
-        List<String> array = new ArrayList<>();
+        List<Integer> array = new ArrayList<>();
         int length = random.nextInt(MIN_INDEX, MAX_INDEX);
         for (int i = 0; i < length; i++) {
-            array.add(String.valueOf(random.nextInt(MIN_VALUE, MAX_VALUE)));
+            array.add(random.nextInt(MIN_VALUE, MAX_VALUE));
         }
-        return array;
+        int[] arrayInt = array.stream()
+                .mapToInt(s -> s)
+                .toArray();
+        CustomArray customArray = new CustomArray(arrayInt);
+        return customArray;
     }
 
 }

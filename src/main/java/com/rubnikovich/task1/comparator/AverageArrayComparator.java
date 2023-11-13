@@ -11,10 +11,6 @@ public class AverageArrayComparator implements Comparator<CustomArray> {
     @Override
     public int compare(CustomArray o1, CustomArray o2){
         ServiceArithmetic serviceArithmetic = ServiceArithmeticImpl.getInstance();
-        try {
             return serviceArithmetic.averageValuesArray(o1) - serviceArithmetic.averageValuesArray(o2);
-        } catch (CustomException exception) {
-            throw new RuntimeException();
-        }
     }
 }
