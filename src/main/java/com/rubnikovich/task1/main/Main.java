@@ -10,10 +10,6 @@ import com.rubnikovich.task1.repository.spec.SpecificationPredicate;
 import com.rubnikovich.task1.repository.spec.impl.AverageRangeSpecification;
 import com.rubnikovich.task1.repository.spec.impl.MaxSpecification;
 import com.rubnikovich.task1.repository.spec.predicate.IdSpecificationPredicate;
-import com.rubnikovich.task1.service.arithmetic.ServiceArithmetic;
-import com.rubnikovich.task1.service.arithmetic.impl.ServiceArithmeticImpl;
-import com.rubnikovich.task1.service.sortreplace.ServiceSortReplace;
-import com.rubnikovich.task1.service.sortreplace.impl.ServiceSortReplaceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,6 +35,8 @@ public class Main {
 
         SpecificationPredicate predicate = new IdSpecificationPredicate(100001);
         logger.info(arrayRepository.queryPredicate(predicate));
+
+        System.out.println(customArrays.hashCode());
 
     }
 }
