@@ -27,5 +27,4 @@ public class CustomParserImpl implements CustomParser {
             throw new CustomException("Array is null", exception);
         }
     }
-
 }
